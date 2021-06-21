@@ -22,11 +22,11 @@ If your project is not framework based, dependencies such as *jersey* and *freem
 </parent>
 
 <dependencies>
-    <dependency>
-        <groupId>com.symphony.platformsolutions</groupId>
-        <artifactId>symphony-api-client-java</artifactId>
-        <version>1.3.3</version>
-    </dependency>      
+<dependency>
+    <groupId>com.symphony.platformsolutions</groupId>
+    <artifactId>symphony-api-client-java</artifactId>
+    <version>1.3.3</version>
+</dependency>
 </dependencies>
 ```
 
@@ -84,20 +84,20 @@ If your project is not framework based, dependencies such as *jersey* and *freem
 </dependencyManagement>
 
 <dependencies>
-    <dependency>
-        <groupId>org.finos.symphony.bdk</groupId>
-        <artifactId>symphony-bdk-core</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.finos.symphony.bdk</groupId>
-        <artifactId>symphony-bdk-http-jersey2</artifactId> <!-- or symphony-bdk-http-webclient -->
-        <scope>runtime</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.finos.symphony.bdk</groupId>
-        <artifactId>symphony-bdk-template-freemarker</artifactId>  <!-- or symphony-bdk-http-handlebars -->
-        <scope>runtime</scope>
-    </dependency>
+<dependency>
+    <groupId>org.finos.symphony.bdk</groupId>
+    <artifactId>symphony-bdk-core</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.finos.symphony.bdk</groupId>
+    <artifactId>symphony-bdk-http-jersey2</artifactId> <!-- or symphony-bdk-http-webclient -->
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>org.finos.symphony.bdk</groupId>
+    <artifactId>symphony-bdk-template-freemarker</artifactId>  <!-- or symphony-bdk-http-handlebars -->
+    <scope>runtime</scope>
+</dependency>
 </dependencies>
 ```
 
@@ -122,6 +122,8 @@ If your bot is deployed on premise, the following properties are required as wel
 - `ssl.trustStore`: trust store path and password
 
 > Click [here](./configuration.md) for more detailed documentation about BDK configuration
+
+
 ### Minimal configuration example
 #### Spring Boot based project
 ##### Java BDK 1.0
@@ -163,7 +165,7 @@ bot-config: /path/to/bot-config.json
 ```
 
 ##### Java BDK 2.0
-Only `application.yaml` file is required. 
+Only `application.yaml` file is required.
 <br/>It can be in *JSON*:
 
 ```json
@@ -301,6 +303,8 @@ keyManager:
 The `SymphonyBdk` class acts as an entry point into the library and provides a [fluent API](./fluent-api.md) to access to the main BDK features such as [Datafeed](./datafeed.md), services or [Activities](./activity-api.md).
 With this class, all BDK services are auto-configured and can be directly accessed without any bot client. Examples of this class usage will be provided in next parts.
 > Click [here](./fluent-api.md) for more detailed documentation about Symphony BDK fluent api
+
+
 ## BDK services
 If you use a Spring Boot based project, BDK services can be directly injected in your bot service. If it is not a framework based project, BDK services can be retrieved with Symphony BDK entry point.
 To illustrate this, let's take an example of a bot reacting to *ping pong* messages.
@@ -328,6 +332,7 @@ public class PingPongBotService {
       }
   }
 }
+
 @Slf4j
 public class PingPongBot {
   private static SymBotClient botClient;
@@ -377,6 +382,7 @@ public class PingPongBotService {
         }
     }
 }
+
 @Component
 public class RealTimeEventComponent {
     private final PingPongBotService pingPongBotService;
@@ -426,11 +432,13 @@ In Java BDK 1.0, the bot had to implement 3 listeners classes:
 public class ElementsListenerImpl implements ElementsListener {
     public void onElementsAction(User initiator, SymphonyElementsAction action) {...}
 }
+
 @Slf4j
 @Service
 public class IMListenerImpl implements ElementsListener {
     public void onIMMessage(InboundMessage msg) {...}
 }
+
 @Slf4j
 @Service
 public class RoomListenerImpl implements RoomListener {
@@ -444,6 +452,7 @@ In Java BDK 2.0, only one component `RealTimeEventComponent` has to be implement
 public class RealTimeEventComponent {
     @EventListener
     public void onMessageSent(RealTimeEvent<V4MessageSent> event) {...}
+
     @EventListener
     public onElementsAction(RealTimeEvent<V4SymphonyElementsAction> event) {...}
 }
