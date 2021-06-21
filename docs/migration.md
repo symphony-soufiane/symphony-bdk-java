@@ -12,14 +12,7 @@ In Java BDK 1.0, the bot had dependencies on `symphony-api-client-java` in addit
 If your project is not framework based, dependencies such as *jersey* and *freemarker* should be added as well.
 ### Spring Boot based project
 
-<table>
-<tr>
-<th>Java BDK 1.0</th>
-<th>Java BDK 2.0</th>
-</tr>
-<tr>
-<td markdown="span">
-
+#### Java BDK 1.0
 ```xml
 <parent>
     <groupId>org.springframework.boot</groupId>
@@ -36,9 +29,8 @@ If your project is not framework based, dependencies such as *jersey* and *freem
     </dependency>      
 </dependencies>
 ```
-</td>
-<td markdown="span">
 
+#### Java BDK 2.0
 ```xml
 <dependencyManagement>
     <dependencies>
@@ -63,19 +55,9 @@ If your project is not framework based, dependencies such as *jersey* and *freem
 </dependency>
 </dependencies>
 ```
-</td>
-</tr>
-</table>
 
 ### Non framework based project
-
-<table>
-<tr>
-<th>Java BDK 1.0</th>
-<th>Java BDK 2.0</th>
-</tr>
-<tr>
-<td markdown="span">
+#### Java BDK 1.0
 
 ```xml
 <dependencies>
@@ -86,9 +68,8 @@ If your project is not framework based, dependencies such as *jersey* and *freem
     </dependency>
 </dependencies>
 ```
-</td>
-<td markdown="span">
 
+#### Java BDK 2.0
 ```xml
 <dependencyManagement>
     <dependencies>
@@ -119,9 +100,6 @@ If your project is not framework based, dependencies such as *jersey* and *freem
     </dependency>
 </dependencies>
 ```
-</td>
-</tr>
-</table>
 
 ## Bot's configuration
 In Java BDK 1.0, two configuration files were required : `application.yaml` (or `application.config`) and `bot-config.json`. Java BDK 2.0 lightened the configuration. Therefore, only `src/main/resources/config.yaml` file is required with a minimum of configuration.
@@ -146,14 +124,7 @@ If your bot is deployed on premise, the following properties are required as wel
 > Click [here](./configuration.md) for more detailed documentation about BDK configuration
 ### Minimal configuration example
 #### Spring Boot based project
-<table>
-<tr>
-<th>Java BDK 1.0</th>
-<th>Java BDK 2.0</th>
-</tr>
-<tr>
-<td markdown="span">
-
+##### Java BDK 1.0
 #### **`application.yaml`:**
 ```yaml
 server:
@@ -190,11 +161,10 @@ bot-config: /path/to/bot-config.json
   "keyManagerProxyPassword": "km.proxy.password"
 }
 ```
-</td>
-<td markdown="span">
 
-Only `application.yaml` file is required. It can be in *JSON*
-
+##### Java BDK 2.0
+Only `application.yaml` file is required. 
+<br/>It can be in *JSON*:
 
 ```json
 {
@@ -224,7 +194,7 @@ Only `application.yaml` file is required. It can be in *JSON*
 }
 ```
 
-or *YAML* format.
+or *YAML* format:
 
 ```yaml
 bdk:
@@ -245,19 +215,9 @@ bdk:
             username: km.proxy.username
             password: km.proxy.passwor
 ```
-</td>
-</tr>
-</table>
 
 #### Non framework based project
-<table>
-<tr>
-<th>Java BDK 1.0</th>
-<th>Java BDK 2.0</th>
-</tr>
-<tr>
-<td markdown="span">
-
+#### Java BDK 1.0
 #### **`bot-config.json`:**
 ```json
 {
@@ -284,10 +244,10 @@ bdk:
   "keyManagerProxyPassword": "km.proxy.password"
 }
 ```
-</td>
-<td markdown="span">
 
-Only `config.yaml` file is required. It can be in *JSON*
+#### Java BDK 2.0
+Only `config.yaml` file is required.
+<br/>It can be in *JSON*:
 
 
 ```json
@@ -316,7 +276,7 @@ Only `config.yaml` file is required. It can be in *JSON*
 }
 ```
 
-or *YAML* format.
+or *YAML* format:
 
 ```yaml
 host: acme.symphony.com
@@ -336,10 +296,6 @@ keyManager:
         username: km.proxy.username
         password: km.proxy.password
 ```
-</td>
-</tr>
-</table>
-
 
 ## Symphony BDK entry point
 The `SymphonyBdk` class acts as an entry point into the library and provides a [fluent API](./fluent-api.md) to access to the main BDK features such as [Datafeed](./datafeed.md), services or [Activities](./activity-api.md).
@@ -348,14 +304,8 @@ With this class, all BDK services are auto-configured and can be directly access
 ## BDK services
 If you use a Spring Boot based project, BDK services can be directly injected in your bot service. If it is not a framework based project, BDK services can be retrieved with Symphony BDK entry point.
 To illustrate this, let's take an example of a bot reacting to *ping pong* messages.
-<table>
-<tr>
-<th>Java BDK 1.0</th>
-<th>Java BDK 2.0</th>
-</tr>
-<tr>
-<td markdown="span">
 
+#### Java BDK 1.0
 In Java BDK 1.0, the main class should have *SymBotClient* object that the bot service can use to call `sendMessage()` method.
 
 ```java
@@ -399,9 +349,8 @@ public class PingPongBot {
   }
 }
 ```
-</td>
-<td markdown="span">
 
+#### Java BDK 2.0
 In Java BDK 2.0, `MessageService` can be injected in the Bot service class to directly call `send()` without needing `SymBotClient`. *(The example below uses a Spring Boot based project)*
 
 ```java
@@ -441,9 +390,6 @@ public class RealTimeEventComponent {
     }
 }
 ```
-</td>
-</tr>
-</table>
 
 An example of non framework based project using `SymphonyBdk` to retrieve BDK services:
 ````java
@@ -468,14 +414,8 @@ public class GreetingsAllRoomsBot {
 > A list of BDK available services can be found [here](./fluent-api.md)
 ## Event listeners
 Java BDK 2.0 comes with a simplified way to handle event listeners.
-<table>
-<tr>
-<th>Java BDK 1.0</th>
-<th>Java BDK 2.0</th>
-</tr>
-<tr>
-<td markdown="span">
 
+#### Java BDK 1.0
 In Java BDK 1.0, the bot had to implement 3 listeners classes:
 - one for IM (1 to 1 conversation)
 - one for MIM (room)
@@ -497,9 +437,8 @@ public class RoomListenerImpl implements RoomListener {
     public void onRoomMessage(InboundMessage msg) {...}
 }
 ```
-</td>
-<td markdown="span">
 
+#### Java BDK 2.0
 In Java BDK 2.0, only one component `RealTimeEventComponent` has to be implemented with two methods having `@EventListener` annotation: This works provided we have the correct parameters with correct types. The 3 classes can be factored in one single component. *(The example below uses a Spring Boot based project)*
 ```java
 public class RealTimeEventComponent {
@@ -509,9 +448,6 @@ public class RealTimeEventComponent {
     public onElementsAction(RealTimeEvent<V4SymphonyElementsAction> event) {...}
 }
 ```
-</td>
-</tr>
-</table>
 
 ## Models
 Models names have been changed in Java BDK 2.0. They actually follow the models in Swagger specification of Symphony's public API. Field names in Java classes correspond to the field names in API's JSON payloads.
